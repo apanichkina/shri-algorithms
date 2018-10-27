@@ -6,35 +6,43 @@
 </head>
 <body>
 <script>
-    // Choice sorting V1
+    // Dive to tree V1
 
-    function choiceSort(arr) {
-        if (arr.length === 1) {
-            // return once we hit an array with a single item
-            return arr
-        }
-
-        const notSortedLen = arr.length;
-        let temp = null;
-
-        for (let i = notSortedLen - 1; i >= 0; i--) {
-            let maxInd = 0;
-            for (let j = 1; j <= i; j++) {
-                if (arr[j] > arr[maxInd]) {
-                    maxInd = j;
-                }
+    const treeInput = {
+        value: 1,
+        children: [
+            {
+                value: 2,
+                children: [
+                    {value: 5, children: []},
+                    {value: 6, children: []},
+                ]
+            },
+            {
+                value: 3,
+                children: [],
+            },
+            {
+                value: 4,
+                children: [
+                    {value: 7, children: []},
+                    {value: 8, children: []},
+                    {value: 9, children: []},
+                ]
             }
-            if (maxInd !== i) {
-                temp = arr[maxInd];
-                arr[maxInd] = arr[i];
-                arr[i] = temp;
-            }
-        }
+        ]
+    };
 
-        return arr
+    function dive(node, result) {
+        result.push(node.value)
+        node.children.forEach((el) => {
+            dive(el, result)
+        })
     }
 
-
+    const result = [];
+    dive(treeInput, result);
+    console.log(result.join(', '))
 </script>
 </body>
 </html>
