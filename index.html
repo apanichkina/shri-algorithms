@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-    // Bubble sorting
+    // Bubble sorting V2
 
     function bubbleSort(arr) {
         if (arr.length === 1) {
@@ -18,11 +18,11 @@
         let temp = null;
 
         for (let i = 0; i < length - 1; i++) {
-            for (let j = i + 1; j < length; j++) {
-                if (arr[i] > arr[j]) {
-                    const temp = arr[j];
-                    arr[j] = arr[i];
-                    arr[i] = temp;
+            for (let j = 1; j < length - i; j++) {
+                if (arr[j-1] > arr[j]) {
+                    temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
                 }
             }
         }
