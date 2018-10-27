@@ -6,41 +6,38 @@
 </head>
 <body>
 <script>
-    // Bracket balance V1
+    // Prime numbers V1
 
-    function bracketBalance(line) {
-        const stack = [];
-        for (let i = 0; i < line.length; i++) {
-            let char = line.charAt(i);
-            if (['{', '[', '('].includes(char)) {
-                stack.push(char)
-            } else if (['}', ']', ')'].includes(char) && getOpen(char) !== stack.pop()){
-                return false
+    function getPrimes(N) {
+        const primes = [];
+        if (N >= 2) {
+            primes.push(2);
+        } else {
+            return primes
+        }
+
+        // все простые числа старше 2 нечетные
+        for(let i = 3; i <= N; i += 2) {
+            let isPrime = true;
+            // наименьший делитель составного числа k не превосходит sqrt(k)
+            for(let j = 2; j * j <= i; j++) {
+                if (i % j === 0) {
+                    isPrime = false;
+                    break;
+                }
             }
+
+            if (isPrime) {
+                primes.push(i)
+            }
+
         }
-        return !stack.length;
+
+        return primes
 
     }
 
-    function getOpen(bracket) {
-        switch (bracket) {
-            case '}':
-                return '{';
-            case ']':
-                return '[';
-            case ')':
-                return '(';
-            default:
-                return ''
-        }
-    }
-
-    const test =  {
-        line: '123(ff)ff',
-        expect: true
-    };
-
-    console.log(bracketBalance(test.line))
+    console.log(getPrimes(11).toString())
 </script>
 </body>
 </html>
