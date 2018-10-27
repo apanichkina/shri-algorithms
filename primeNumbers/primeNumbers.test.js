@@ -1,4 +1,4 @@
-const { getPrimes } = require('./primeNumbers');
+const { getPrimes, getPrimesMemorized } = require('./primeNumbers');
 const {expect} = require('chai');
 
 describe('Prime numbers', function() {
@@ -27,7 +27,7 @@ describe('Prime numbers', function() {
 
   testCases.forEach(function(test) {
     it('correctly work with ' + test, function() {
-      const result = getPrimes(test.n);
+      const result = getPrimesMemorized(test.n);
       expect(result).to.deep.equal(test.expect);
     });
   });
