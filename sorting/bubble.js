@@ -7,14 +7,15 @@ function bubbleSort(arr) {
   const length = arr.length;
   let temp = null;
 
-  for (let i = 0; i < length - 1; i++) {
-    for (let j = 1; j < length - i; j++) {
+  for (let i = length; i > 1; i--) {
+    for (let j = 1; j < i; j++) {
       if (arr[j-1] > arr[j]) {
        temp = arr[j];
         arr[j] = arr[j-1];
         arr[j-1] = temp;
       }
     }
+    console.log('fff', arr)
   }
 
   return arr
