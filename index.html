@@ -6,50 +6,41 @@
 </head>
 <body>
 <script>
-    // Dive to wide tree V1
+    // Bracket balance V1
 
-    const treeInput = {
-        value: 1,
-        children: [
-            {
-                value: 2,
-                children: [
-                    {value: 5, children: []},
-                    {value: 6, children: []},
-                ]
-            },
-            {
-                value: 3,
-                children: [],
-            },
-            {
-                value: 4,
-                children: [
-                    {value: 7, children: []},
-                    {value: 8, children: []},
-                    {value: 9, children: []},
-                ]
+    function bracketBalance(line) {
+        const stack = [];
+        for (let i = 0; i < line.length; i++) {
+            let char = line.charAt(i);
+            if (['{', '[', '('].includes(char)) {
+                stack.push(char)
+            } else if (['}', ']', ')'].includes(char) && getOpen(char) !== stack.pop()){
+                return false
             }
-        ]
-    };
+        }
+        return !stack.length;
 
-    function wide(node, result) {
-        const queue = [node];
-        while(queue.length) {
-            let el = queue.shift();
-            result.push(el.value);
-            if (el.children.length){
-                el.children.forEach((child) => {
-                    queue.push(child)
-                })
-            }
+    }
+
+    function getOpen(bracket) {
+        switch (bracket) {
+            case '}':
+                return '{';
+            case ']':
+                return '[';
+            case ')':
+                return '(';
+            default:
+                return ''
         }
     }
 
+    const test =  {
+        line: '123(ff)ff',
+        expect: true
+    };
 
-    const result = [];
-    wide(treeInput, result);
-    console.log(result.join(', '))
+    console.log(bracketBalance(test.line))
 </script>
 </body>
 </html>
